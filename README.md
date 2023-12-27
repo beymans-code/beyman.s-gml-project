@@ -1,7 +1,7 @@
 
 # Proyecto de prueba de Angular 17.0.8
 
-# Beyman Magrego López Mejía
+### <a name="name"></a> Beyman Magrego López Mejía
 
 Componentes dinámicos para un desarrollo más eficiente
 
