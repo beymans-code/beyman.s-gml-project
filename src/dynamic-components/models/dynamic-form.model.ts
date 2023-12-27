@@ -105,4 +105,4 @@ export type ControlType =
 /**
  * Tipo de input.
  */
-export type InputType = 'text' | 'number' | 'currency' | 'textarea' | 'date';
+export type InputType = 'text' | 'number' | 'currency' | 'textarea' | 'date' | 'email';

@@ -73,6 +73,7 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
     this.destroyFormSubscriptions$ = new Subject();
     this.firstLoad = false;
     this.autoComplete = false;
+    this.formGroup.get( '')?.touched
   }
 
   public ngOnInit(): void {}
@@ -180,8 +181,9 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!item?._validator_disabled) {
       if (item?._validator_required) {
         validators.push(Validators.required);
-        validators.push(Validators.requiredTrue);
       }
+
+      if (item?._input_type === 'email') validators.push(Validators.email);
 
       if (item._validator_minLength)
         validators.push(Validators.minLength(item._validator_minLength));

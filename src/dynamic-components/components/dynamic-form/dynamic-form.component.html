@@ -12,7 +12,9 @@
         (' col-md-' + (_baseControl.col?.md || '12')) +
         (' col-sm-' + (_baseControl.col?.sm || '12')) +
         (' col-xs-' + (_baseControl.col?.xs || '12')) +
-				(_baseControl._validator_disabled? ' disabled' : '')
+				(_baseControl._validator_disabled? ' disabled' : '') +
+				(formGroup.get(_baseControl.key.trim() || '')?.touched && formGroup.get(_baseControl.key.trim() || '')?.invalid? ' invalid' : '')+
+				(formGroup.get(_baseControl.key.trim() || '')?.touched && formGroup.get(_baseControl.key.trim() || '')?.valid? ' valid' : '')
       ">
 		@switch (_baseControl.type) {
 		@case ('Input') {

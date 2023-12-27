@@ -16,8 +16,8 @@ export class AppComponent {
 
   public controls: BaseControl[] = [
     {
-      key: 'text',
-      label: 'Texto',
+      key: 'descripcion',
+      label: 'Descripción',
       type: 'Input',
       col: {
         xxl: 6,
@@ -27,11 +27,12 @@ export class AppComponent {
         sm: 12,
         xs: 12,
       },
-      _input_placeholder: 'Placeholder',
+      _input_placeholder: 'Ingresa la descripción',
+      _validator_required: true,
     },
     {
-      key: 'text2',
-      label: 'Texto 2',
+      key: 'fecha',
+      label: 'Fecha',
       type: 'Input',
       col: {
         xxl: 6,
@@ -42,11 +43,12 @@ export class AppComponent {
         xs: 12,
       },
       _input_type: 'date',
-      _input_placeholder: 'Placeholder 2',
+      _input_placeholder: 'Selecciona la fecha',
+      _validator_required: true,
     },
     {
-      key: 'text3',
-      label: 'Texto 3',
+      key: 'correo',
+      label: 'Correo',
       type: 'Input',
       col: {
         xxl: 6,
@@ -56,7 +58,9 @@ export class AppComponent {
         sm: 12,
         xs: 12,
       },
-      _input_placeholder: 'Placeholder 3',
+      _input_type: 'email',
+      _input_placeholder: 'Ingresa el correo electrónico',
+      _validator_required: true,
     },
   ];
 

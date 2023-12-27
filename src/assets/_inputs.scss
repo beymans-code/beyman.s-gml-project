@@ -1,3 +1,10 @@
+@mixin inputBorder($background-color, $border-color, $outline-color ) {
+    background-color: $background-color;
+    border-color: $border-color !important;
+    outline-color: $outline-color !important;
+}
+
+
 .beyman-s-input {
     display: block;
 
@@ -8,7 +15,7 @@
         padding: 0 12px;
         color: #000000ad;
     }
-    
+
     &:hover,
     &:focus-within {
         label {
@@ -39,6 +46,7 @@
         border: none;
         padding: 2px 0;
         min-height: 40px !important;
+        background: transparent;
 
         &:focus {
             outline: none;
@@ -53,21 +61,29 @@
     }
 }
 
+
 .disabled {
     cursor: not-allowed;
-
     .beyman-s-input {
         pointer-events: none !important;
-
         * {
             color: #00000073 !important;
         }
-
         .input-container {
             cursor: not-allowed;
-            background-color: #0000000a;
-            border-color: rgba(118, 118, 118, 0.3) !important;
-            outline-color: transparent !important;
+            @include inputBorder(#0000000a, #7676764d, transparent);
+        }
+    }
+}
+
+.invalid {
+    cursor: text;
+    .beyman-s-input {
+        * {
+            color: #5017179c !important;
+        }
+        .input-container {
+            @include inputBorder(#9c03031e, #9c03031e, transparent);
         }
     }
 }
