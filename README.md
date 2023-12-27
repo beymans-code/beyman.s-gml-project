@@ -60,11 +60,14 @@ El output `formValue` retorna el valor del formulario con un EventEmitter.
 El arreglo de objetos `baseControls` debe tener al menos los siguientes atributos:
 
 `type`: El tipo de campo.
+
 `key`: El nombre clave del campo (sin espacios).
+
 `label`: La etiqueta del campo.
+
 `col`: La configuracion de columnas del campo.
 
-Por ejemplo, el siguiente código crea un formulario con tres campos: 'text', 'date', 'email'
+Por ejemplo, el siguiente código crea un formulario con tres campos: 'text', 'date', 'email'.
 
 `TypeScript`
 ```javascript
