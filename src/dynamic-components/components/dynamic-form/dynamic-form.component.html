@@ -1,0 +1,37 @@
+<form #form="ngForm" class="row" [formGroup]="formGroup" [autocomplete]="autoComplete ? 'on' : 'off'">
+	@for (_baseControl of _baseControls; track _baseControl.key) {
+	@if (
+	_baseControl && _baseControl.type && _baseControl.key &&
+	formGroup.get(_baseControl.key.trim() || '')
+	) {
+	<div class="p-relative" [hidden]="_baseControl.hidden" [ngClass]="
+        'col-xxl-' +
+        (_baseControl.col?.xxl || '12') +
+        (' col-xl-' + (_baseControl.col?.xl || '12')) +
+        (' col-lg-' + (_baseControl.col?.lg || '12')) +
+        (' col-md-' + (_baseControl.col?.md || '12')) +
+        (' col-sm-' + (_baseControl.col?.sm || '12')) +
+        (' col-xs-' + (_baseControl.col?.xs || '12')) +
+				(_baseControl._validator_disabled? ' disabled' : '')
+      ">
+		@switch (_baseControl.type) {
+		@case ('Input') {
+		<app-dynamic-control-text label="Texto del boton" tooltip="tooltip del boton" [disabled]="false" [_formControl]="
+				abstractControlToFormControl(
+					formGroup.get(_baseControl.key.trim() || '')
+				)
+			" [baseControl]="_baseControl"></app-dynamic-control-text>
+
+		} @case ('CheckBox') {
+		CheckBox
+		} @case ('Select') {
+		Select
+		}
+		}
+	</div>
+	}
+
+	} @empty {
+	<span>No hay campos en el formulario.</span>
+	}
+</form>
