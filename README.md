@@ -50,7 +50,7 @@ El proyecto incluye una serie de componentes dinámicos que se pueden utilizar p
 
 Por ejemplo, para crear un formulario dinámico, puede utilizar el siguiente código:
 
-`HTML`
+### <a name="html"></a> HTML
 ```html
 <app-dynamic-form [baseControls]="controls || []" (formValue)="formValue($event)"></app-dynamic-form>
 ```
@@ -69,7 +69,7 @@ El arreglo de objetos `baseControls` debe tener al menos los siguientes atributo
 
 Por ejemplo, el siguiente código crea un formulario con tres campos: 'text', 'date', 'email'.
 
-`TypeScript`
+### <a name="TypeScript"></a> TypeScript
 ```javascript
   public controls: BaseControl[] = [
     {
