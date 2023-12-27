@@ -12,6 +12,10 @@ export interface BaseControl {
    */
   label: string;
   /**
+   * Columnas grids.
+   */
+  col: columnConfig;
+  /**
    * Valor por defecto.
    */
   defaultValue?: any;
@@ -35,10 +39,6 @@ export interface BaseControl {
    * Apariencia del input.
    */
   appearance?: 'fill' | 'outline';
-  /**
-   * Columnas grids.
-   */
-  col?: columnConfig;
   /**
    * Tipo de input: 'text' | 'number' | 'currency' | 'textarea' | 'date'.
    */

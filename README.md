@@ -1,27 +1,122 @@
-# BeymanSGmlProject
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.8.
+# Proyecto de prueba de Angular 17.0.8
 
-## Development server
+# Beyman Magrego López Mejía
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Componentes dinámicos para un desarrollo más eficiente
 
-## Code scaffolding
+# Introducción
+Este proyecto utiliza componentes dinámicos para reducir la cantidad de código necesario para construir y maquetar componentes comunes, como formularios, tablas, tarjetas y botones. Esto permite crear componentes y plantillas con pocas líneas de código, lo que facilita su mantenimiento y escalabilidad.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Beneficios de los componentes dinámicos
+Los componentes dinámicos ofrecen una serie de beneficios, entre los que se incluyen:
 
-## Build
+`Reducción del código`.
+`Mejor legibilidad`.
+`Mayor flexibilidad`.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+# Conclusiones
+Los componentes dinámicos son una herramienta eficaz para el desarrollo de aplicaciones Angular. Pueden ayudar a reducir la cantidad de código, mejorar la legibilidad y aumentar la flexibilidad.
 
-## Running unit tests
+# Instalación
+Para instalar el proyecto, siga estos pasos:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Clone el repositorio:
+```bash
+git clone https://github.com/beymans-code/beyman.s-gml-project.git
+```
 
-## Running end-to-end tests
+Instale las dependencias: 
+```bash
+cd beyman.s-gml-project
+```
+y
+```bash
+npm install
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Inicie el servidor de desarrollo: 
+```bash
+npm start
+```
 
-## Further help
+El proyecto estará disponible en la dirección 
+```bash
+http://localhost:4200
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Uso
+El proyecto incluye una serie de componentes dinámicos que se pueden utilizar para crear formularios, tablas, tarjetas y botones. Para utilizar un componente dinámico, simplemente importe el componente al archivo de plantilla y especifique los parámetros de entrada necesarios.
+
+Por ejemplo, para crear un formulario dinámico, puede utilizar el siguiente código:
+
+`HTML`
+```html
+<app-dynamic-form [baseControls]="controls || []" (formValue)="formValue($event)"></app-dynamic-form>
+```
+Usa el código con precaución. Más información
+El parámetro `baseControls` es un arreglo de objetos que especifica la configuración del formulario. 
+El output `formValue` retorna el valor del formulario con un EventEmitter.
+El arreglo de objetos `baseControls` debe tener al menos los siguientes atributos:
+
+`type`: El tipo de campo.
+`key`: El nombre clave del campo (sin espacios).
+`label`: La etiqueta del campo.
+`col`: La configuracion de columnas del campo.
+
+Por ejemplo, el siguiente código crea un formulario con tres campos: 'text', 'date', 'email'
+`TypeScript`
+```javascript
+  public controls: BaseControl[] = [
+    {
+      key: 'text',
+      label: 'Texto',
+      type: 'Input',
+      col: {
+        xxl: 6,
+        xl: 6,
+        lg: 6,
+        md: 6,
+        sm: 12,
+        xs: 12,
+      },
+      _input_placeholder: 'Placeholder',
+    },
+    {
+      key: 'fecha',
+      label: 'Fecha',
+      type: 'Input',
+      col: {
+        xxl: 6,
+        xl: 6,
+        lg: 6,
+        md: 6,
+        sm: 12,
+        xs: 12,
+      },
+      _input_type: 'date',
+      _input_placeholder: 'Selecciona la fecha',
+    },
+    {
+      key: 'correo',
+      label: 'Correo',
+      type: 'Input',
+      col: {
+        xxl: 6,
+        xl: 6,
+        lg: 6,
+        md: 6,
+        sm: 12,
+        xs: 12,
+      },
+        _input_type: 'email',
+      _input_placeholder: 'Ingresa el correo electrónico',
+    },
+  ];
+
+  public formValue(value: object) {
+    console.log(value);
+  }
+```
+
+Licencia Apache 2.0.
