@@ -99,8 +99,6 @@
 
         .input-container {
             @include inputBorder(#9c03031e, #9c03031e, transparent);
-
-
         }
 
         &:hover,
@@ -110,6 +108,5 @@
                 outline: solid 3px #9c030362 !important;
             }
         }
-
     }
 }
