@@ -11,8 +11,8 @@ Este proyecto utiliza componentes dinámicos para reducir la cantidad de código
 # Beneficios de los componentes dinámicos
 Los componentes dinámicos ofrecen una serie de beneficios, entre los que se incluyen:
 
-`Reducción del código`.
-`Mejor legibilidad`.
+`Reducción del código`,
+`Mejor legibilidad`,
 `Mayor flexibilidad`.
 
 # Conclusiones
@@ -30,7 +30,7 @@ Instale las dependencias:
 ```bash
 cd beyman.s-gml-project
 ```
-y
+
 ```bash
 npm install
 ```
@@ -65,6 +65,7 @@ El arreglo de objetos `baseControls` debe tener al menos los siguientes atributo
 `col`: La configuracion de columnas del campo.
 
 Por ejemplo, el siguiente código crea un formulario con tres campos: 'text', 'date', 'email'
+
 `TypeScript`
 ```javascript
   public controls: BaseControl[] = [
