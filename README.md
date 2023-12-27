@@ -66,7 +66,7 @@ El arreglo de objetos `baseControls` debe tener al menos los siguientes atributo
 
 Por ejemplo, el siguiente código crea un formulario con tres campos: 'text', 'date', 'email'
 `TypeScript`
-```typecript
+```javascript
   public controls: BaseControl[] = [
     {
       key: 'text',
