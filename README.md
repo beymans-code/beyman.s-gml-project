@@ -54,9 +54,11 @@ Por ejemplo, para crear un formulario dinámico, puede utilizar el siguiente có
 ```html
 <app-dynamic-form [baseControls]="controls || []" (formValue)="formValue($event)"></app-dynamic-form>
 ```
-Usa el código con precaución. Más información
-El parámetro `baseControls` es un arreglo de objetos que especifica la configuración del formulario. 
+
+El parámetro `baseControls` es un arreglo de objetos que especifica la configuración del formulario.
+
 El output `formValue` retorna el valor del formulario con un EventEmitter.
+
 El arreglo de objetos `baseControls` debe tener al menos los siguientes atributos:
 
 `type`: El tipo de campo.
@@ -123,4 +125,4 @@ Por ejemplo, el siguiente código crea un formulario con tres campos: 'text', 'd
   }
 ```
 
-Licencia Apache 2.0.
+### <a name="Licencia"></a> Licencia Apache 2.0.
