@@ -29,6 +29,8 @@ export class AppComponent {
       },
       _input_placeholder: 'Ingresa la descripción',
       _validator_required: true,
+      _validator_maxLength: 2,
+      _validator_minLength: 2
     },
     {
       key: 'fecha',
