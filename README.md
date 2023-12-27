@@ -75,8 +75,8 @@ Por ejemplo, el siguiente código crea un formulario con tres campos: 'text', 'd
 ```javascript
   public controls: BaseControl[] = [
     {
-      key: 'text',
-      label: 'Texto',
+      key: 'descripcion',
+      label: 'Descripción',
       type: 'Input',
       col: {
         xxl: 6,
@@ -86,7 +86,7 @@ Por ejemplo, el siguiente código crea un formulario con tres campos: 'text', 'd
         sm: 12,
         xs: 12,
       },
-      _input_placeholder: 'Placeholder',
+      _input_placeholder: 'Ingresa la descripción',
     },
     {
       key: 'fecha',
