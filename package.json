@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --aot --configuration production --optimization",
+    "build": "ng build --configuration production --aot --optimization --source-map=false",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:beyman.s-gml-project": "node docs/server/server.mjs"
