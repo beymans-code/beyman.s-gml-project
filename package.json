@@ -4,10 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --aot --configuration production --optimization",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:beyman.s-gml-project": "node dist/beyman.s-gml-project/server/server.mjs"
+    "serve:ssr:beyman.s-gml-project": "node docs/server/server.mjs"
   },
   "private": true,
   "dependencies": {
