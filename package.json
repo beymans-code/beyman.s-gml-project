@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --output-path=docs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:beyman.s-gml-project": "node dist/beyman.s-gml-project/server/server.mjs"
@@ -33,7 +33,6 @@
     "@angular/compiler-cli": "^17.0.0",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
-    "@types/lodash": "^4.14.202",
     "@types/node": "^18.18.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
