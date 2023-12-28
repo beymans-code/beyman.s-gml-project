@@ -63,8 +63,17 @@ export interface BaseControl {
    * Validador max length.
    */
   _validator_maxLength?: number;
+
+  /**
+   * 
+   */
+  _enable_if?: EnableIf,
 }
 
+
+export interface EnableIf {
+  key: string,
+}
 export interface columnConfig {
   /**
    * PTamano en pntallas xxl.

@@ -48,7 +48,8 @@ thead tr {
 }
 
 .table-container {
-    height: calc(100vh - 200px);
+    height: calc(100vh - 335px);
+    min-height: 500px;
     display: block;
     overflow: overlay;
     padding: 10px 0;
@@ -82,4 +83,9 @@ th.shadowLeft {
             box-shadow: -3px 3px 0px 0px #EDECF1;
         }
     }
+}
+
+app-dynamic-table {
+    display: block;
+    width: 100%;
 }

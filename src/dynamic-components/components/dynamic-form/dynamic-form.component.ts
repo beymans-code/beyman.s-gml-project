@@ -16,7 +16,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-import { BaseControl } from '../../models/dynamic-form.model';
+import { BaseControl, EnableIf } from '../../models/dynamic-form.model';
 import { clone } from 'lodash';
 import { NgClass } from '@angular/common';
 import { DynamicControlTextComponent } from '../dynamic-control-text/dynamic-control-text.component';
@@ -32,6 +32,9 @@ import { DynamicControlTextComponent } from '../dynamic-control-text/dynamic-con
     {
       name: 'autoComplete',
     },
+  ],
+  outputs: [
+    'formValue'
   ],
   imports: [ReactiveFormsModule, NgClass, DynamicControlTextComponent],
   templateUrl: './dynamic-form.component.html',
@@ -62,6 +65,8 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
   public formValue: EventEmitter<object> = new EventEmitter<object>();
 
   public firstLoad: boolean;
+
+  public mode: 'create' | 'edit' | undefined;
 
   public formGroup = new FormGroup({});
 
@@ -207,5 +212,34 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
         this.formValue.emit(value);
         this.valid = this.formGroup.valid;
       });
+
+    this._baseControls.forEach((control, index) => {
+      if (control._enable_if?.key) {
+        this.formGroup.get(control._enable_if.key)?.valueChanges
+          .pipe(takeUntil(this.destroyFormSubscriptions$))
+          .subscribe((value) => {
+            if (control._enable_if)
+              this.valideEnableIf(index, value, control.key)
+          });
+      }
+    })
+  }
+
+  private valideEnableIf(index: number, value: any, key: string) {
+    this.toggleControl(index, key, !value)
+  }
+
+
+  toggleControl(index: number, key: string, disabled: boolean) {
+    disabled ? this.formGroup.get(key)?.disable() : this.formGroup.get(key)?.enable();
+    this._baseControls[index] = {
+      ...this._baseControls[index],
+      _validator_disabled: disabled,
+    }
+  }
+
+  public reset() {
+    this.formGroup.reset();
+    this.mode = undefined;
   }
 }

@@ -1,18 +1,13 @@
 @if (_tableConfig) {
-
-<div class="row">
-    <div class="col-sm-12 col-md-6">
-        <app-dynamic-form class="table-search" [baseControls]="controls || []"
-            (formValue)="search($event)"></app-dynamic-form>
-    </div>
-    <div class="col-sm-12 col-md-6 d-flex justify-content-end align-items-center">
-        <button class="dark">
-            <label>agregar</label>
-        </button>
-    </div>
+<div class="table-actions d-flex justify-content-space-between align-items-end">
+    <app-dynamic-form class="table-search" [baseControls]="controls || []" #searchForm
+        (formValue)="search($event)"></app-dynamic-form>
+    <app-dynamic-button label="agregar" color="dark" (action)="add.emit()"></app-dynamic-button>
 </div>
+
 <app-dynamic-card>
-    <div class="table-container" [id]="'table-container' + _tableConfig.id" #container (scroll)="scroll($event.target)">
+    <div content class="table-container" [id]="'table-container' + _tableConfig.id" #container
+        (scroll)="scroll($event.target)">
         <table>
             <thead>
                 <tr>
@@ -27,17 +22,18 @@
                 </tr>
             </thead>
             <tbody>
-                @for (_row of filteredData; track trackByIndex) {
+                @for (_row of filteredData; track trackByIndex; let idx = $index, e = $even) {
                 <tr>
                     @for (_col of _tableConfig.columns; track _col.key) {
                     <td [class.sticky]="_col.sticky" [class.left]="_col.sticky === 'left'"
                         [class.right]="_col.sticky === 'right'"
                         [class.shadowLeft]="_col.sticky === 'left' && scrollLef !== undefined && scrollLef > 0"
-                        [class.shadowRight]="_col.sticky === 'right' && scrollLef !== undefined && scrollLef < 100">
+                        [class.shadowRight]="_col.sticky === 'right' && scrollLef !== undefined && scrollLef < 100"
+                        [class.action-cell]="_col.key === 'actions'">
                         @if (_col.key === 'actions') {
-                        <button class="fab">
-                            <label for="">...</label>
-                        </button>
+                        <ng-container [ngTemplateOutlet]="buttons"
+                            [ngTemplateOutletContext]="{index: getCell(_row, 'index')}">
+                        </ng-container>
                         } @else if (_col.mask === 'logo') {
                         <span class="logo">
                             {{getCell(_row, _col.key)}}
@@ -56,3 +52,17 @@
 } @else {
 Agrega la configuracion de la tabla.
 }
+
+<ng-template #buttons let-index='index'>
+    <app-dynamic-button actions icon="more_vert" type="fab" class="more"
+        (action)="currentEditRow = index"></app-dynamic-button>
+
+    @if(currentEditRow === index) {
+    <div class="buttons-container card" [id]="'buttons-container'+ index" (focus)="currentEditRow = index;"
+        (blur)="currentEditRow = undefined;">
+        <app-dynamic-button actions icon="edit" type="fab" (action)="startEditRow(index)"></app-dynamic-button>
+        <app-dynamic-button actions icon="delete" type="fab" (action)="delete(index)"></app-dynamic-button>
+        <app-dynamic-button actions icon="close" type="fab" (action)="closeMenu(index)"></app-dynamic-button>
+    </div>
+    }
+</ng-template>
