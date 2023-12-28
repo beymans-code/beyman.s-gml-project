@@ -67,18 +67,22 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public _baseControls!: BaseControl[];
 
+  public valid: boolean;
+
   private destroyFormSubscriptions$: Subject<void>;
 
   constructor() {
     this.destroyFormSubscriptions$ = new Subject();
     this.firstLoad = false;
     this.autoComplete = false;
-    this.formGroup.get( '')?.touched
+    this.valid = false;
   }
 
-  public ngOnInit(): void {}
+  public ngOnInit(): void { }
 
-  public ngAfterViewInit(): void {}
+  public ngAfterViewInit(): void {
+    this.valid = this.formGroup.valid;
+  }
 
   public ngOnDestroy(): void {
     this.destroyFormSubscriptions$.next();
@@ -201,6 +205,7 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(takeUntil(this.destroyFormSubscriptions$))
       .subscribe((value) => {
         this.formValue.emit(value);
+        this.valid = this.formGroup.valid;
       });
   }
 }

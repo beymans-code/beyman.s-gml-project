@@ -1,1 +1,58 @@
-<p>dynamic-table works!</p>
+@if (_tableConfig) {
+
+<div class="row">
+    <div class="col-sm-12 col-md-6">
+        <app-dynamic-form class="table-search" [baseControls]="controls || []"
+            (formValue)="search($event)"></app-dynamic-form>
+    </div>
+    <div class="col-sm-12 col-md-6 d-flex justify-content-end align-items-center">
+        <button class="dark">
+            <label>agregar</label>
+        </button>
+    </div>
+</div>
+<app-dynamic-card>
+    <div class="table-container" [id]="'table-container' + _tableConfig.id" #container (scroll)="scroll($event.target)">
+        <table>
+            <thead>
+                <tr>
+                    @for (_col of _tableConfig.columns; track _col.key) {
+                    <th [class.sticky]="_col.sticky" [class.left]="_col.sticky === 'left'"
+                        [class.right]="_col.sticky === 'right'"
+                        [class.shadowLeft]="_col.sticky === 'left' && scrollLef !== undefined && scrollLef > 0"
+                        [class.shadowRight]="_col.sticky === 'right' && scrollLef !== undefined && scrollLef < 100">
+                        {{_col.headerText}}
+                    </th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (_row of filteredData; track trackByIndex) {
+                <tr>
+                    @for (_col of _tableConfig.columns; track _col.key) {
+                    <td [class.sticky]="_col.sticky" [class.left]="_col.sticky === 'left'"
+                        [class.right]="_col.sticky === 'right'"
+                        [class.shadowLeft]="_col.sticky === 'left' && scrollLef !== undefined && scrollLef > 0"
+                        [class.shadowRight]="_col.sticky === 'right' && scrollLef !== undefined && scrollLef < 100">
+                        @if (_col.key === 'actions') {
+                        <button class="fab">
+                            <label for="">...</label>
+                        </button>
+                        } @else if (_col.mask === 'logo') {
+                        <span class="logo">
+                            {{getCell(_row, _col.key)}}
+                        </span>
+                        } @else {
+                        {{getCell(_row, _col.key)}}
+                        }
+                    </td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</app-dynamic-card>
+} @else {
+Agrega la configuracion de la tabla.
+}

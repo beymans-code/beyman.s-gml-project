@@ -17,7 +17,7 @@ export interface TableConfig {
     /**
      * Opciones de la tabla.
      */
-    options: TableOptions
+    options?: TableOptions
 }
 
 /**
@@ -35,7 +35,11 @@ export interface TableColumn {
     /**
      * Mascaras para visualizar la informacion.
      */
-    mask: 'logo' | 'date';
+    mask?: 'logo' | 'date';
+    /**
+     * 
+     */
+    sticky?: 'left' | 'right' | 'top' | 'bottom'
 }
 
 /**
@@ -45,11 +49,11 @@ export interface TableOptions {
     /**
      * Acciones de la tabla.
      */
-    actions: TableActions;
+    actions?: TableActions;
     /**
      * Activar / Desactivar el filtro de la tabla.
      */
-    filter: boolean;
+    filter?: boolean;
 }
 
 /**
@@ -59,9 +63,9 @@ export interface TableActions {
     /**
      * Accion de editar.
      */
-    edit: boolean;
+    edit?: boolean;
     /**
      * Accion de eliminar.
      */
-    delete: boolean;
+    delete?: boolean;
 }
