@@ -1,6 +1,7 @@
 {
   "name": "beyman.s-gml-project",
   "version": "0.0.0",
+  "homepage": "https://beymans-code.github.io/beyman.s-gml-project",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
