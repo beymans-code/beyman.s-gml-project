@@ -1,4 +1,4 @@
-# Proyecto de prueba de Angular 17
+# Proyecto de prueba (Angular 17)
 
 ### <a name="name"></a> Beyman Magrego López Mejía
 
