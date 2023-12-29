@@ -501,6 +501,19 @@
     }
 }
 
+@media (pointer:coarse) {
+    *::-webkit-scrollbar {
+        width: 2px;
+        height: 2px;
+        background: transparent;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        width: 10px;
+        height: 10px;
+    }
+}
+
 * {
     scrollbar-gutter: stable both-edges;
 }

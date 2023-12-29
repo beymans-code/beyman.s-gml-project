@@ -1,11 +1,13 @@
 @if (_tableConfig) {
-<div class="table-actions d-flex justify-content-space-between align-items-end">
-    <app-dynamic-form class="table-search" [baseControls]="controls || []" #searchForm
+<div class="table-actions row justify-content-space-between">
+    <app-dynamic-form class="table-search col-sm-12 col-md-6" [baseControls]="controls || []" #searchForm
         (formValue)="search($event)"></app-dynamic-form>
-    <app-dynamic-button label="agregar" color="dark" (action)="add.emit()"></app-dynamic-button>
+    <div class="col-sm-12 col-md-6 d-flex   align-items-end justify-content-end">
+        <app-dynamic-button label="agregar" color="dark" (action)="add.emit()"></app-dynamic-button>
+    </div>
 </div>
 
-<app-dynamic-card>
+<app-dynamic-card [hideActions]="true">
     <div content class="table-container" [id]="'table-container' + _tableConfig.id" #container
         (scroll)="scroll($event.target)">
         <table>

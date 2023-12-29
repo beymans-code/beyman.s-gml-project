@@ -7,6 +7,9 @@ import { Component, Input } from '@angular/core';
   inputs: [
     {
       name: 'title',
+    },
+    {
+      name: 'hideActions',
     }
   ],
   templateUrl: './dynamic-card.component.html',
@@ -16,4 +19,9 @@ export class DynamicCardComponent {
 
   @Input()
   public title!: string;
+
+
+  @Input()
+  public hideActions!: boolean;
+
 }

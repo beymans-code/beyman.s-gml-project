@@ -17,9 +17,10 @@
     }
 
     .title {
-        margin: -10px 0 25px 0;
+        margin: -20px auto 20px auto;
         text-transform: capitalize;
         text-align: center;
+        max-width: calc(100% - 100px);
     }
 
     .actions {
@@ -32,13 +33,14 @@
 
     .close-button {
         position: absolute !important;
-        top: 24px;
-        right: 15px;
+        top: 12px;
+        right: 0px;
 
         button {
             background: transparent !important;
         }
     }
+
     animation: scale-up-bottom 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
@@ -52,5 +54,43 @@
     100% {
         transform: scale(1);
         transform-origin: center;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .card {
+        padding: 40px 20px 40px 20px;
+    }
+    app-dynamic-table .card  {
+        padding: 10px 0px;
+    }
+}
+
+@media screen and (max-width: 767px) and (pointer:coarse) {
+    .card {
+        padding: 40px 20px 40px 20px;
+    }
+    app-dynamic-table .card  {
+        padding:  12px 10px;
+    }
+}
+
+
+@media screen and (max-width: 450px) {
+    .card {
+        padding: 40px 0px;
+        margin: 10px 10px;
+
+        .title {
+            font-size: 20px;
+        }
+
+        .actions {
+            zoom: 0.9;
+
+            app-dynamic-button {
+                margin: 5px;
+            }
+        }
     }
 }
