@@ -4,7 +4,9 @@
 ### <a name="name"></a> Beyman Magrego López Mejía
 
 Componentes dinámicos para un desarrollo más eficiente.
-Demo: https://beymans-code.github.io/beyman.s-gml-project/
+
+### <a name="name"></a> Demo
+https://beymans-code.github.io/beyman.s-gml-project/
 
 # Introducción
 Este proyecto utiliza componentes dinámicos para reducir la cantidad de código necesario para construir y maquetar componentes comunes, como formularios, tablas, tarjetas y botones. Esto permite crear componentes y plantillas con pocas líneas de código, lo que facilita su mantenimiento y escalabilidad.
