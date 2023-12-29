@@ -22,7 +22,7 @@ Los componentes dinámicos ofrecen una serie de beneficios, entre los que se inc
 
 `Mayor flexibilidad`.
 
-`El NO USO de librerías de terceros`.
+`NO USO de librerías de terceros`.
 
 # Conclusiones
 
