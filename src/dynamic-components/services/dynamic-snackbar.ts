@@ -28,7 +28,6 @@ export function snackbar(type: 'info' | 'delete' | 'done' | 'error' | 'warning',
   </div>`;
 
   snackbar.classList.add('snackbar');
-  snackbar.classList.add('card');
   snackbar.classList.add(type);
   snackbar.id = 'snackbar';
   snackbar.innerHTML = template.trim();

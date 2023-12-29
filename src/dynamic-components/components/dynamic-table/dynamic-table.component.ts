@@ -267,8 +267,6 @@ export class DynamicTableComponent implements AfterViewInit {
             !rowId
         });
 
-        console.log(exist);
-
         if (!exist) {
           this._tableConfig.rows = [
             ...this._tableConfig.rows,

@@ -30,7 +30,7 @@
                     <td [class.sticky]="_col.sticky" [class.left]="_col.sticky === 'left'"
                         [class.right]="_col.sticky === 'right'"
                         [class.shadowLeft]="_col.sticky === 'left' && scrollLef !== undefined && scrollLef > 0"
-                        [class.shadowRight]="_col.sticky === 'right' && scrollLef !== undefined && scrollLef < 100"
+                        [class.shadowRight]="_col.sticky === 'right' && scrollLef !== undefined && scrollLef < 99"
                         [class.action-cell]="_col.key === 'actions'">
                         @if (_col.key === 'actions') {
                         <ng-container [ngTemplateOutlet]="buttons"

@@ -64,7 +64,6 @@ export class ProductFormComponent implements AfterViewInit, OnDestroy {
           this.formCreate.mode = 'edit';
           this.formCreate.toggleControl(0, 'id', true);
         } else if (!getItem('product') && (params['edit'] || getItem('edit'))) {
-          console.log('create');
           this.router.navigate(['/product']);
         }
       });
