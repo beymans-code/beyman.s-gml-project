@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BaseControl } from '../../dynamic-components/models/dynamic-form.model';
 
+/**
+ * Servicio del formulario.
+ */
 @Injectable()
 export class ProductFormService {
 
+  /**
+   * Configuracion inicial del formulario.
+   */
   public controls: BaseControl[] = [
     {
       key: 'id',

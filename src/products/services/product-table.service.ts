@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
 import { TableConfig } from '../../dynamic-components/models/dynamic-table.model';
 
+/**
+ * Servicio de la tabla.
+ */
 @Injectable()
 export class ProductTableService {
 
+  /**
+   * Configuracion inical de la tabla.
+   */
   public tableConfig: TableConfig = {
     columns: [
       {
@@ -36,115 +42,124 @@ export class ProductTableService {
 
       {
         id: '1',
-        logo: 'ST',
-        productName: 'Seguro Todo Riesgo',
-        description: 'Este seguro cubre accidentes de transito...',
+        logo: 'SR',
+        productName: 'Seguro todo riesgo',
+        description: 'Cubre accidentes de transito...',
         date1: '2023-12-13',
         date2: '2023-12-13'
       },
       {
         id: '2',
-        logo: 'ST',
-        productName: 'Seguro Todo Riesgo',
-        description: 'Este seguro cubre accidentes de transito...',
+        logo: 'SA',
+        productName: 'Seguro de auto',
+        description: 'Cubre tu vehiculo...',
         date1: '2023-12-13',
         date2: '2023-12-13'
       },
       {
         id: '3',
-        logo: 'ST',
-        productName: 'Seguro Todo Riesgo',
-        description: 'Este seguro cubre accidentes de transito...',
+        logo: 'SM',
+        productName: 'Seguro moto',
+        description: 'Cubre tu moto...',
         date1: '2023-12-13',
         date2: '2023-12-13'
       },
       {
         id: '4',
-        logo: 'ST',
-        productName: 'Seguro Todo Riesgo',
-        description: 'Este seguro cubre accidentes de transito...',
+        logo: 'SV',
+        productName: 'Seguro vida',
+        description: 'Cubre tus necesidades...',
         date1: '2023-12-13',
         date2: '2023-12-13'
       },
       {
         id: '5',
-        logo: 'ST',
-        productName: 'Seguro Todo Riesgo',
-        description: 'Este seguro cubre accidentes de transito...',
+        logo: 'SC',
+        productName: 'Seguro movil',
+        description: 'Cubre tu celular...',
         date1: '2023-12-13',
         date2: '2023-12-13'
       },
       {
         id: '6',
         logo: 'ST',
-        productName: 'Seguro Todo Riesgo',
-        description: 'Este seguro cubre accidentes de transito...',
+        productName: 'Seguro trabajo',
+        description: 'Cubre accidentes laborales...',
         date1: '2023-12-13',
         date2: '2023-12-13'
       },
       {
         id: '7',
-        logo: 'ST',
-        productName: 'Seguro Todo Riesgo',
-        description: 'Este seguro cubre accidentes de transito...',
+        logo: 'SP',
+        productName: 'Seguro mascotas',
+        description: 'Cubre tu mascota...',
         date1: '2023-12-13',
         date2: '2023-12-13'
       },
       {
         id: '8',
-        logo: 'ST',
-        productName: 'Seguro Todo Riesgo',
-        description: 'Este seguro cubre accidentes de transito...',
+        logo: 'SH',
+        productName: 'Seguro vivienda',
+        description: 'Cubre tu casa...',
         date1: '2023-12-13',
         date2: '2023-12-13'
       },
       {
         id: '9',
-        logo: 'ST',
-        productName: 'Seguro Todo Riesgo',
-        description: 'Este seguro cubre accidentes de transito...',
+        logo: 'SA',
+        productName: 'Seguro viajes',
+        description: 'Cubre tus viajes...',
         date1: '2023-12-13',
         date2: '2023-12-13'
       },
       {
         id: '10',
-        logo: 'ST',
-        productName: 'Seguro Todo Riesgo',
-        description: 'Este seguro cubre accidentes de transito...',
+        logo: 'SS',
+        productName: 'Seguro salud',
+        description: 'Cubre tu salud...',
         date1: '2023-12-13',
         date2: '2023-12-13'
       },
       {
         id: '11',
-        logo: 'ST',
-        productName: 'Seguro Todo Riesgo',
-        description: 'Este seguro cubre accidentes de transito...',
+        logo: 'SX',
+        productName: 'Seguro pertenencias',
+        description: 'Cubre tus pertenencias...',
         date1: '2023-12-13',
         date2: '2023-12-13'
       },
       {
         id: '12',
-        logo: 'ST',
-        productName: 'Seguro Todo Riesgo',
-        description: 'Este seguro cubre accidentes de transito...',
+        logo: 'SR',
+        productName: 'Seguro robo',
+        description: 'Ce cubre en caso de tobo...',
         date1: '2023-12-13',
         date2: '2023-12-13'
       },
       {
         id: '13',
-        logo: 'ST',
-        productName: 'Seguro Todo Riesgo',
-        description: 'Este seguro cubre accidentes de transito...',
+        logo: 'SY',
+        productName: 'Seguro general',
+        description: 'Cubre varios aspectos de tu vida...',
         date1: '2023-12-13',
         date2: '2023-12-13'
-      }
+      },
+      {
+        id: '14',
+        logo: 'S1',
+        productName: 'Seguro mascotas premium',
+        description: 'Cubre tu mascota (mayores beneficios)...',
+        date1: '2023-12-13',
+        date2: '2023-12-13'
+      },
     ],
     options: {
       actions: {
         delete: true,
         edit: true
       },
-      filter: true
+      filter: true,
+      rowId: 'id',
     }
   }
 }

@@ -2,6 +2,9 @@ import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BaseControl } from '../../models/dynamic-form.model';
 
+/**
+ * Clase base de los formularios dinamicos.
+ */
 @Component({
   selector: 'control-base',
   template: '',
@@ -12,8 +15,18 @@ import { BaseControl } from '../../models/dynamic-form.model';
   styles: [''],
 })
 export class ControlBase {
+  /**
+   * Configuracion del control.
+   */
   @Input() public baseControl!: BaseControl;
+
+  /**
+   * Form control ReactiveFormModule.
+   */
   @Input() public _formControl!: FormControl;
 
+  /**
+   * Crea una instancia de la clase.
+   */
   constructor() { }
 }

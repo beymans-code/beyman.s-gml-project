@@ -37,7 +37,7 @@ export interface TableColumn {
      */
     mask?: 'logo' | 'date';
     /**
-     * 
+     * Posicion fija de una columna y sus celdas en la tabla.
      */
     sticky?: 'left' | 'right' | 'top' | 'bottom'
 }
@@ -54,6 +54,10 @@ export interface TableOptions {
      * Activar / Desactivar el filtro de la tabla.
      */
     filter?: boolean;
+    /**
+     * Identificador de la fila.
+     */
+    rowId?: string;
 }
 
 /**

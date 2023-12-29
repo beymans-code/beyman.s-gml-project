@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  // ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -21,6 +20,9 @@ import { clone } from 'lodash';
 import { NgClass } from '@angular/common';
 import { DynamicControlTextComponent } from '../dynamic-control-text/dynamic-control-text.component';
 
+/**
+ * Formularios dinamicos.
+ */
 @Component({
   selector: 'app-dynamic-form',
   standalone: true,
@@ -40,7 +42,11 @@ import { DynamicControlTextComponent } from '../dynamic-control-text/dynamic-con
   templateUrl: './dynamic-form.component.html',
   styleUrl: './dynamic-form.component.scss',
 })
-export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DynamicFormComponent implements AfterViewInit, OnDestroy {
+
+  /**
+   * Configuracion inicial.
+   */
   @Input()
   public set baseControls(value: BaseControl[] | undefined) {
     const newControlConfig = value || [];
@@ -58,24 +64,51 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
     this.firstLoad = true;
   }
 
+  /**
+   * Valida si se habilita el autocompletado del navegador en el formulario.
+   */
   @Input()
   public autoComplete: boolean;
 
+  /**
+   * Retorna el valor del formulario.
+   */
   @Output()
   public formValue: EventEmitter<object> = new EventEmitter<object>();
 
+  /**
+   * Carga inicial.
+   */
   public firstLoad: boolean;
 
+  /**
+   * Modo del formulario.
+   */
   public mode: 'create' | 'edit' | undefined;
 
+  /**
+   * Form group.
+   */
   public formGroup = new FormGroup({});
 
+  /**
+   * Configuracion inicial (variable local).
+   */
   public _baseControls!: BaseControl[];
 
+  /**
+   * Estado del formulario.
+   */
   public valid: boolean;
 
+  /**
+   * Elimina las suscripciones.
+   */
   private destroyFormSubscriptions$: Subject<void>;
 
+  /**
+   * Crea una instancia de la clase.
+   */
   constructor() {
     this.destroyFormSubscriptions$ = new Subject();
     this.firstLoad = false;
@@ -83,23 +116,44 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
     this.valid = false;
   }
 
-  public ngOnInit(): void { }
-
+  /**
+   * Se ejecuta al renderizar el componente.
+   */
   public ngAfterViewInit(): void {
     this.valid = this.formGroup.valid;
   }
 
+  /**
+   * Se ejecuta al destruir el componente.
+   */
   public ngOnDestroy(): void {
     this.destroyFormSubscriptions$.next();
     this.destroyFormSubscriptions$.complete();
   }
 
+  /**
+   * Convierte un abstract control en Form control.
+   * @param _abstractControl - AbstractControl.
+   * @returns FormControl.
+   */
   public abstractControlToFormControl(
     _abstractControl: AbstractControl | null
   ): FormControl {
     return _abstractControl as FormControl;
   }
 
+  /**
+   * Reinicia el formulario.
+   */
+  public reset() {
+    this.formGroup.reset();
+    this.mode = undefined;
+  }
+
+  /**
+   * Crea el formulario.
+   * @param controls - Controles.
+   */
   private _createForm(controls: BaseControl[]) {
     if (controls)
       try {
@@ -116,6 +170,10 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
       }
   }
 
+  /**
+   * Actualiza el formulario ya renderizado.
+   * @param controls - Controles.
+   */
   private _updateForm(controls: BaseControl[]) {
     const oldKeys = Object.keys(this.formGroup.value);
     this.destroyFormSubscriptions$.next();
@@ -143,6 +201,10 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
     this._listenFormChanges();
   }
 
+  /**
+   * Agrega un control al formulario.
+   * @param control - Control.
+   */
   private _addControl(control: BaseControl) {
     const formControl = this._controlValidators(control);
     if (control?._validator_disabled) {
@@ -154,6 +216,10 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
     this.formGroup.updateValueAndValidity();
   }
 
+  /**
+   * Actualiza un control existente en el formulario.
+   * @param control - Control.
+   */
   private _updateControl(control: BaseControl) {
     const validators = this._getValidators(control);
     this.formGroup.get(control.key?.trim() || '')?.setValidators(validators);
@@ -166,6 +232,11 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  /**
+   * Obtiene el control.
+   * @param item - Configuracion del control.
+   * @returns Control.
+   */
   private _controlValidators(item: BaseControl) {
     const validators = this._getValidators(item);
 
@@ -181,10 +252,14 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
       },
       Validators.compose(validators)
     );
-
     return _control;
   }
 
+  /**
+   * Obtiene los validadores de un control.
+   * @param item - Configuracion del control.
+   * @returns Validators.
+   */
   private _getValidators(item: BaseControl): any[] {
     let validators: any[] = [];
     if (!item?._validator_disabled) {
@@ -204,6 +279,9 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
     return validators;
   }
 
+  /**
+   * Escucha los cambios del formulario.
+   */
   private _listenFormChanges() {
     this.destroyFormSubscriptions$ = new Subject();
     this.formGroup.valueChanges
@@ -219,27 +297,33 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
           .pipe(takeUntil(this.destroyFormSubscriptions$))
           .subscribe((value) => {
             if (control._enable_if)
-              this.valideEnableIf(index, value, control.key)
+              this._valideEnableIf(index, value, control.key)
           });
       }
     })
   }
 
-  private valideEnableIf(index: number, value: any, key: string) {
+  /**
+   * Valida si un control se habilita o no dependiendo de la configuracion inicial.
+   * @param index - Indice del control.
+   * @param value - Valor del control con el que se valida.
+   * @param key - Clave del control a habilitar o deshabilitar.
+   */
+  private _valideEnableIf(index: number, value: any, key: string) {
     this.toggleControl(index, key, !value)
   }
 
-
-  toggleControl(index: number, key: string, disabled: boolean) {
+  /**
+   * Habilita o deshabilita un control.
+   * @param index - Indice del control.
+   * @param key Clave del control a habilitar o deshabilitar.
+   * @param disabled 
+   */
+  public toggleControl(index: number, key: string, disabled: boolean) {
     disabled ? this.formGroup.get(key)?.disable() : this.formGroup.get(key)?.enable();
     this._baseControls[index] = {
       ...this._baseControls[index],
       _validator_disabled: disabled,
     }
-  }
-
-  public reset() {
-    this.formGroup.reset();
-    this.mode = undefined;
   }
 }

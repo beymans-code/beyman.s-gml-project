@@ -1,3 +1,6 @@
+/**
+ * Configuracion base de un control.
+ */
 export interface BaseControl {
   /**
    * Tipo de control.
@@ -65,15 +68,24 @@ export interface BaseControl {
   _validator_maxLength?: number;
 
   /**
-   * 
+   * Habilitar un campo dependiendo del valor de otro.
    */
   _enable_if?: EnableIf,
 }
 
-
+/**
+ * Habilitar un campo dependiendo del valor de otro.
+ */
 export interface EnableIf {
+  /**
+   * Clave del campo con el que se quiere validar.
+   */
   key: string,
 }
+
+/**
+ * Columnas grids.
+ */
 export interface columnConfig {
   /**
    * PTamano en pntallas xxl.

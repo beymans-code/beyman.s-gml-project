@@ -3,9 +3,11 @@ import { DynamicTableComponent } from '../../../dynamic-components/components/dy
 import { TableConfig } from '../../../dynamic-components/models/dynamic-table.model';
 import { ProductTableService } from '../../services/product-table.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { delay } from 'rxjs';
-import { addItem, getItem, removeItem } from '../../services/storage';
+import { addItem, getItem, removeItem } from '../../../dynamic-components/services/storage';
 
+/**
+ * Tabla de productos.
+ */
 @Component({
   selector: 'app-product-table',
   standalone: true,
@@ -17,15 +19,29 @@ import { addItem, getItem, removeItem } from '../../services/storage';
   styleUrl: './product-table.component.scss'
 })
 export class ProductTableComponent {
-
+  /**
+   * Tabla.
+   */
   @ViewChild('table')
   public table!: DynamicTableComponent;
 
+  /**
+   * Configuracion de la tabla.
+   */
   public tableConfig: TableConfig;
 
+  /**
+   * Index a editar.
+   */
   private editIndex!: string | undefined;
 
-  constructor(private _productTableService: ProductTableService, private route: ActivatedRoute, public router: Router, private cdRef: ChangeDetectorRef) {
+  /**
+   * Crea una instancia de la clase.
+   * @param _productTableService - Servicio de configuracion de la tabla.
+   * @param router - Router angular.
+   * @param cdRef - Detector de cambios.
+   */
+  constructor(private _productTableService: ProductTableService, public router: Router, private cdRef: ChangeDetectorRef) {
     this.editIndex = getItem('edit');
     this.tableConfig = {
       ...this._productTableService.tableConfig,
@@ -33,27 +49,35 @@ export class ProductTableComponent {
     };
   }
 
+  /**
+   * Se ejecuta al renderizar el componente.
+   */
   public ngAfterViewInit(): void {
     if (getItem('product')) {
-      console.log(JSON.parse(getItem('product')));
-      console.log(this.editIndex);
-      this.addData(JSON.parse(getItem('product')), this.editIndex !== null);
-      removeItem('product')
+      this.addData(getItem('product'), this.editIndex !== null);
     }
+    removeItem('product')
     removeItem('edit')
     this.cdRef.detectChanges();
   }
 
-  editRow(row: any) {
+  /**
+   * Editar la fila.
+   * @param row - Fila.
+   */
+  public editRow(row: any) {
     addItem('edit', row.index)
     addItem('product', row)
     this.router.navigate(['/product', 'edit',]);
   }
 
+  /**
+   * Agregar / editar una fila.
+   * @param row - Fila.
+   * @param edit - Editar.
+   */
   public addData(row: object, edit: boolean) {
-    console.log(edit);
-
-    if (edit) {
+    if (edit && typeof this.editIndex !== 'undefined') {
       this.table.editRow(row, Number(this.editIndex))
     } else {
       this.table.addRows([
@@ -62,6 +86,10 @@ export class ProductTableComponent {
     }
   }
 
+  /**
+   * Guarda el cambio de la data en el storage.
+   * @param rows - Filas.
+   */
   public dataChange(rows: object[]) {
     addItem('rows', rows)
   }
