@@ -68,12 +68,6 @@ export class DynamicTableComponent implements AfterViewInit {
   public dataChange: EventEmitter<object[]> = new EventEmitter<object[]>();
 
   /**
-   * Contenedor de la tabla.
-   */
-  @ViewChild('container')
-  public container!: ElementRef;
-
-  /**
    * Formulario de busqueda.
    */
   @ViewChild('searchForm')
@@ -128,7 +122,7 @@ export class DynamicTableComponent implements AfterViewInit {
    */
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.scroll(this.container.nativeElement);
+    this.scroll();
   }
 
   /**
@@ -168,7 +162,7 @@ export class DynamicTableComponent implements AfterViewInit {
    * Se ejecuta al renderizar el componente.
    */
   public ngAfterViewInit(): void {
-    this.scroll(this.container.nativeElement);
+    this.scroll();
     this._setDataSource();
   }
 
@@ -197,7 +191,8 @@ export class DynamicTableComponent implements AfterViewInit {
    * Valida el scroll horizontal para agregar estilos en la tabla.
    * @param - event Evento scroll.
    */
-  public scroll(event: any) {
+  public scroll() {
+    const event = this.viewPort?.elementRef?.nativeElement;
     if (event?.clientWidth < event?.scrollWidth) {
       const valor = event.scrollLeft > 0 ? event?.scrollLeft + event.clientWidth : event?.scrollLeft;
       const total = event?.scrollWidth;
