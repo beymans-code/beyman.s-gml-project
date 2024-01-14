@@ -16,9 +16,9 @@ import {
 } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { BaseControl, EnableIf } from '../../models/dynamic-form.model';
-import { clone } from 'lodash';
 import { NgClass } from '@angular/common';
 import { DynamicControlTextComponent } from '../dynamic-control-text/dynamic-control-text.component';
+import { clone } from '../../services/storage';
 
 /**
  * Formularios dinamicos.

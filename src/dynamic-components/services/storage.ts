@@ -3,8 +3,11 @@
  * @param name - Nombre.
  * @param value - Valor.
  */
-export function addItem(name: any, value: any) {
-    localStorage.setItem(name, btoa(JSON.stringify(value)))
+export function addItem(name: any, value: any): void {
+    if (typeof window === 'undefined') {
+        return;
+    }
+    localStorage?.setItem(name, btoa(JSON.stringify(value)))
 }
 
 /**
@@ -13,7 +16,10 @@ export function addItem(name: any, value: any) {
  * @returns Valor | undefined.
  */
 export function getItem(name: string) {
-    let val: any = `${localStorage.getItem(name)}`
+    if (typeof window === 'undefined') {
+        return undefined
+    }
+    let val: any = `${localStorage?.getItem(name)}`
     if (val === 'null') {
         val = undefined;
     }
@@ -26,12 +32,27 @@ export function getItem(name: string) {
  * @param name - Nombre.
  */
 export function removeItem(name: string) {
-    localStorage.removeItem(name)
+    if (typeof window === 'undefined') {
+        return;
+    }
+    localStorage?.removeItem(name)
 }
 
 /**
  * Reinicia el localStorage.
  */
 export function clearItems() {
-    localStorage.clear()
+    if (typeof window === 'undefined') {
+        return;
+    }
+    localStorage?.clear()
+}
+
+/**
+ * Clona un objeto evitando los valores por referencia.
+ * @param object - Objeto a clonar.
+ * @returns Objeto clonado.
+ */
+export function clone(object: any): any {
+    return JSON.parse(JSON.stringify(object))
 }

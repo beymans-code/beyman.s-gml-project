@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Inject, Input, Output, ViewChild } from '@angular/core';
 import { TableConfig } from '../../models/dynamic-table.model';
 import { BaseControl } from '../../models/dynamic-form.model';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
@@ -6,6 +6,7 @@ import { DynamicCardComponent } from '../dynamic-card/dynamic-card.component';
 import { CommonModule } from '@angular/common';
 import { DynamicButtonComponent } from '../dynamic-button/dynamic-button.component';
 import { snackbar } from '../../services/dynamic-snackbar';
+import { CdkVirtualScrollViewport, ScrollingModule } from '@angular/cdk/scrolling';
 
 /**
  * Tablas dinamicas.
@@ -13,7 +14,7 @@ import { snackbar } from '../../services/dynamic-snackbar';
 @Component({
   selector: 'app-dynamic-table',
   standalone: true,
-  imports: [CommonModule, DynamicFormComponent, DynamicCardComponent, DynamicButtonComponent],
+  imports: [CommonModule, ScrollingModule, DynamicFormComponent, DynamicCardComponent, DynamicButtonComponent],
   inputs: [
     {
       name: 'tableConfig',
@@ -78,6 +79,9 @@ export class DynamicTableComponent implements AfterViewInit {
   @ViewChild('searchForm')
   public searchForm!: DynamicFormComponent;
 
+  @ViewChild(CdkVirtualScrollViewport, { static: false })
+  public viewPort!: CdkVirtualScrollViewport;
+
   /**
    * Control de busqueda.
    */
@@ -108,20 +112,31 @@ export class DynamicTableComponent implements AfterViewInit {
    */
   public lastEditRowIndex: number | undefined;
 
+
+  /**
+   * Ultimo indice del row en edicion.
+   */
+  public headerTop: number;
+
+  /**
+ * Ultimo indice del row en edicion.
+ */
+  public currentThTop: number | undefined;
+
   /**
    * Evento de cambio de tamano en la pantalla.
    */
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.scroll(this.container.nativeElement);
-    this.cdRef.detectChanges();
   }
 
   /**
    * Crea una instancia de la clase.
-   * @param cdRef - Detector de cambios.
    */
-  constructor(private cdRef: ChangeDetectorRef) {
+  constructor() {
+    this.headerTop = -10;
+    this.currentThTop = undefined;
     this.controls = [
       {
         key: 'buscar',
@@ -154,7 +169,6 @@ export class DynamicTableComponent implements AfterViewInit {
    */
   public ngAfterViewInit(): void {
     this.scroll(this.container.nativeElement);
-    this.cdRef.detectChanges();
     this._setDataSource();
   }
 
@@ -167,12 +181,21 @@ export class DynamicTableComponent implements AfterViewInit {
     return Object.keys(obj).map((key: string) => [key, obj[key]])
   }
 
+  public get headerVirtualTopPosition(): string {
+    if (!this.viewPort) {
+      return '-10px';
+    }
+    const offset = this.viewPort.getOffsetToRenderedContentStart();
+
+    return `-${offset ? offset + 10 : 10}px`;
+  }
+
   /**
    * Valida el scroll horizontal para agregar estilos en la tabla.
    * @param - event Evento scroll.
    */
   public scroll(event: any) {
-    if (event.clientWidth < event?.scrollWidth) {
+    if (event?.clientWidth < event?.scrollWidth) {
       const valor = event.scrollLeft > 0 ? event?.scrollLeft + event.clientWidth : event?.scrollLeft;
       const total = event?.scrollWidth;
       this.scrollLef = (valor / total) * 100;

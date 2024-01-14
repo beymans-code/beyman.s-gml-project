@@ -8,24 +8,25 @@
 </div>
 
 <app-dynamic-card [hideActions]="true">
-    <div content class="table-container" [id]="'table-container' + _tableConfig.id" #container
-        (scroll)="scroll($event.target)">
+    <cdk-virtual-scroll-viewport itemSize="80" content class="table-container"
+        [id]="'table-container' + _tableConfig.id" #container (scroll)="scroll($event.target)">
         <table>
             <thead>
                 <tr>
-                    @for (_col of _tableConfig.columns; track _col.key) {
+                    @for (_col of _tableConfig.columns; track _col.key; let idx = $index, e = $even) {
                     <th [class.sticky]="_col.sticky" [class.left]="_col.sticky === 'left'"
                         [class.right]="_col.sticky === 'right'"
                         [class.shadowLeft]="_col.sticky === 'left' && scrollLef !== undefined && scrollLef > 0"
-                        [class.shadowRight]="_col.sticky === 'right' && scrollLef !== undefined && scrollLef < 99">
+                        [class.shadowRight]="_col.sticky === 'right' && scrollLef !== undefined && scrollLef < 99"
+                        [style.top]="headerVirtualTopPosition">
                         {{_col.headerText}}
                     </th>
                     }
                 </tr>
             </thead>
             <tbody>
-                @for (_row of filteredData; track trackByIndex; let idx = $index, e = $even) {
-                <tr>
+                <!-- @for (_row of filteredData; track trackByIndex; let idx = $index, e = $even) { -->
+                <tr *cdkVirtualFor="let _row of filteredData; index as idx">
                     @for (_col of _tableConfig.columns; track _col.key) {
                     <td [class.sticky]="_col.sticky" [class.left]="_col.sticky === 'left'"
                         [class.right]="_col.sticky === 'right'"
@@ -46,10 +47,10 @@
                     </td>
                     }
                 </tr>
-                }
+                <!-- } -->
             </tbody>
         </table>
-    </div>
+    </cdk-virtual-scroll-viewport>
 </app-dynamic-card>
 } @else {
 Agrega la configuracion de la tabla.
