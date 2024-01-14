@@ -8,7 +8,7 @@
 </div>
 
 <app-dynamic-card [hideActions]="true">
-    <cdk-virtual-scroll-viewport itemSize="80" content class="table-container"
+    <cdk-virtual-scroll-viewport itemSize="80" content class="table-container" minBufferPx="500" maxBufferPx="800"
         [id]="'table-container' + _tableConfig.id" #container (scroll)="scroll($event.target)">
         <table>
             <thead>

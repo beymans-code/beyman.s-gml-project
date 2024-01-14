@@ -181,6 +181,9 @@ export class DynamicTableComponent implements AfterViewInit {
     return Object.keys(obj).map((key: string) => [key, obj[key]])
   }
 
+  /**
+   * Obtiene la posicion superior de cada elemento sticky top dentro del virtual scroll viewport.
+   */
   public get headerVirtualTopPosition(): string {
     if (!this.viewPort) {
       return '-10px';
