@@ -132,7 +132,7 @@ export class ProductTableService {
         id: '12',
         logo: 'SR',
         productName: 'Seguro robo',
-        description: 'Ce cubre en caso de tobo...',
+        description: 'Ce cubre en caso de robo...',
         date1: '2023-12-13',
         date2: '2023-12-13'
       },
