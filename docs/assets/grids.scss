@@ -7,7 +7,7 @@
     --bs-breakpoint-xxl: 1400px;
 }
 
-.row {
+app-root > *, .row {
     --bs-gutter-x: 1.5rem;
     --bs-gutter-y: 0;
     display: flex;
@@ -472,12 +472,20 @@
     align-items: center;
 }
 
+.justify-content-center {
+    justify-content: center;
+}
+
 .justify-content-space-between {
     justify-content: space-between;
 }
 
 .align-items-end {
     align-items: end;
+}
+
+.padding-0 {
+    padding: 0 !important;
 }
 
 *::-webkit-scrollbar {

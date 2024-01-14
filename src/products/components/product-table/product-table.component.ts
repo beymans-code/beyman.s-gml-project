@@ -4,6 +4,7 @@ import { TableConfig } from '../../../dynamic-components/models/dynamic-table.mo
 import { ProductTableService } from '../../services/product-table.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { addItem, getItem, removeItem } from '../../../dynamic-components/services/storage';
+import { DynamicButtonComponent } from '../../../dynamic-components/components/dynamic-button/dynamic-button.component';
 
 /**
  * Tabla de productos.
@@ -11,7 +12,7 @@ import { addItem, getItem, removeItem } from '../../../dynamic-components/servic
 @Component({
   selector: 'app-product-table',
   standalone: true,
-  imports: [DynamicTableComponent],
+  imports: [DynamicTableComponent, DynamicButtonComponent],
   providers: [
     ProductTableService
   ],
@@ -59,6 +60,11 @@ export class ProductTableComponent {
     removeItem('product')
     removeItem('edit')
     this.cdRef.detectChanges();
+  }
+
+  public reset(){
+    localStorage.clear();
+    window.location.reload();
   }
 
   /**
